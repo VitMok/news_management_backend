@@ -1,17 +1,9 @@
 from rest_framework import serializers
 
 from .models import (
-    Resource,
     News,
 )
 
-
-class CreateNewsSerializer(serializers.ModelSerializer):
-    """ Сериализатор новости """
-
-    class Meta:
-        model = News
-        fields = '__all__'
 
 class NewsSerializer(serializers.ModelSerializer):
     """  """

@@ -1,19 +1,18 @@
 from django.db import transaction
-from django.shortcuts import render
 from rest_framework import viewsets, generics
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
 
+from .tasks import (
+    parsing_news_from_yandex,
+    parsing_news_from_ozon,
+)
 from .models import (
     News,
 )
 from .serializers import (
-    CreateNewsSerializer,
     NewsSerializer,
-)
-from .services import (
-    _parsing_news_from_yandex_and_ozon,
 )
 from .news_filtration import NewsFilter
 
@@ -23,11 +22,12 @@ class NewsParsingView(APIView):
 
     @transaction.atomic
     def post(self, request):
-        queryset = _parsing_news_from_yandex_and_ozon()
-        serializer = CreateNewsSerializer(queryset, many=True)
-        return Response(serializer.data)
+        parsing_news_from_yandex.delay()
+        parsing_news_from_ozon.delay()
+        return Response({'message': 'Парсинг новостей запущен.'})
 
 class NewsListView(generics.ListAPIView):
+    """ Вывод списка новостей """
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     filter_backends = [DjangoFilterBackend]
