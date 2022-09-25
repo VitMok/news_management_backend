@@ -1,0 +1,44 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+asgiref = "*"
+async-generator = "*"
+attrs = "*"
+beautifulsoup4 = "*"
+certifi = "*"
+charset-normalizer = "*"
+django = "==3.2"
+django-adminlte3 = "*"
+django-cors-headers = "==3.13.0"
+django-filter = "==22.1"
+djangorestframework = "==3.13.1"
+h11 = "*"
+idna = "*"
+outcome = "*"
+psycopg2-binary = "*"
+pysocks = "*"
+pytz = "*"
+pyvirtualdisplay = "*"
+requests = "*"
+selenium = "*"
+sniffio = "*"
+sortedcontainers = "*"
+soupsieve = "*"
+sqlparse = "*"
+tqdm = "*"
+trio = "*"
+trio-websocket = "*"
+urllib3 = "*"
+wsproto = "*"
+celery = "*"
+dateparser = "*"
+flower = "*"
+redis = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
