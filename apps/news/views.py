@@ -19,7 +19,7 @@ from .news_filtration import NewsFilter
 
 
 class NewsParsingView(generics.ListCreateAPIView):
-    """  """
+    """ Парсинг новостей """
     serializer_class = AmountNewsSerializer
 
     def list(self, request, *args, **kwargs):
@@ -30,19 +30,10 @@ class NewsParsingView(generics.ListCreateAPIView):
         if serializer.is_valid():
             cursor = connection.cursor()
             cursor.execute("TRUNCATE TABLE news RESTART IDENTITY CASCADE")
-            parsing_news_from_yandex.delay(serializer.data['amount_yandex_news'])
+            # parsing_news_from_yandex.delay(serializer.data['amount_yandex_news'])
             parsing_news_from_ozon.delay(serializer.data['amount_ozon_news'])
             return Response({'message': 'Парсинг новостей запущен.'})
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# class NewsParsingView(APIView):
-#     """ Парсинг новостей """
-#
-#     @transaction.atomic
-#     def post(self, request):
-#         parsing_news_from_yandex.delay()
-#         parsing_news_from_ozon.delay()
-#         return Response({'message': 'Парсинг новостей запущен.'})
 
 class NewsListView(generics.ListAPIView):
     """ Вывод списка новостей """

@@ -24,9 +24,7 @@ class Tag(models.Model):
         unique=True,
         verbose_name='Название тэга'
     )
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
+
     class Meta:
         db_table = 'tags'
         verbose_name = 'Тэг'

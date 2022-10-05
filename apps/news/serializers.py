@@ -16,7 +16,7 @@ class AmountNewsSerializer(serializers.Serializer):
     )
 
 class NewsSerializer(serializers.ModelSerializer):
-    """  """
+    """ Сериализатор новости """
     resource = serializers.SlugRelatedField(read_only=True, slug_field='name')
     tags = serializers.SlugRelatedField(read_only=True, slug_field='name', many=True)
 
